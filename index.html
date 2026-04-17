@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pragati Prithvi – Hardware Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --text: #e8e8f0;
+      --muted: #6b6b8a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo { font-weight: 800; font-size: 16px; letter-spacing: 0.05em; color: var(--accent); font-family: 'Space Mono', monospace; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      letter-spacing: 0.08em; text-transform: uppercase; font-family: 'Space Mono', monospace;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-contact {
+      background: var(--accent); color: #000; font-weight: 700;
+      font-family: 'Space Mono', monospace; font-size: 12px;
+      padding: 8px 18px; border-radius: 2px; text-decoration: none;
+      letter-spacing: 0.06em; transition: opacity 0.2s;
+    }
+    .nav-contact:hover { opacity: 0.85; }
+
+    /* HERO */
+    #hero {
+      min-height: 92vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 0 2rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 960px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-block; font-family: 'Space Mono', monospace;
+      font-size: 12px; color: var(--accent); border: 1px solid var(--accent);
+      padding: 4px 12px; border-radius: 2px; margin-bottom: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 6rem); font-weight: 800;
+      line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted); max-width: 520px;
+      margin-bottom: 2.5rem; line-height: 1.8;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 3rem; }
+    .htag {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      background: var(--surface2); border: 1px solid var(--border);
+      color: var(--muted); padding: 6px 14px; border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent); color: #000; font-weight: 700;
+      font-family: 'Space Mono', monospace; font-size: 13px;
+      padding: 12px 28px; border: none; border-radius: 2px;
+      cursor: pointer; letter-spacing: 0.06em; transition: opacity 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      background: transparent; color: var(--text); font-weight: 600;
+      font-family: 'Space Mono', monospace; font-size: 13px;
+      padding: 12px 28px; border: 1px solid var(--border); border-radius: 2px;
+      cursor: pointer; letter-spacing: 0.06em; transition: border-color 0.2s, color 0.2s;
+      text-decoration: none; display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; max-width: 960px; margin: 0 auto; }
+
+    .sec-label {
+      font-family: 'Space Mono', monospace; font-size: 11px;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .sec-line { width: 48px; height: 3px; background: var(--accent); margin-bottom: 2.5rem; border-radius: 2px; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+    .about-text p { margin-bottom: 1rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.25rem; border-radius: 4px;
+    }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent); font-family: 'Space Mono', monospace; }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.04em; }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-left: 3px solid var(--accent); padding: 1.5rem 1.75rem;
+      border-radius: 0 4px 4px 0; transition: border-left-color 0.2s;
+    }
+    .exp-card:hover { border-left-color: var(--accent2); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+    .exp-role { font-weight: 700; font-size: 1.05rem; }
+    .exp-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
+    .exp-company { font-size: 13px; color: var(--accent); margin-bottom: 0.75rem; font-family: 'Space Mono', monospace; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-size: 13px; color: var(--muted); padding: 3px 0 3px 16px;
+      position: relative; line-height: 1.6;
+    }
+    .exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 5px; }
+
+    /* PROJECTS */
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .proj-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.5rem; border-radius: 4px;
+      transition: border-color 0.2s, transform 0.15s;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .proj-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px; background: var(--accent); transform: scaleX(0);
+      transform-origin: left; transition: transform 0.2s;
+    }
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .proj-card:hover::after { transform: scaleX(1); }
+    .proj-icon { font-size: 24px; margin-bottom: 0.75rem; }
+    .proj-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+    .proj-sub { font-size: 12px; color: var(--accent); font-family: 'Space Mono', monospace; margin-bottom: 0.75rem; }
+    .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ptag {
+      font-size: 10px; font-family: 'Space Mono', monospace;
+      background: var(--surface2); color: var(--muted);
+      border: 1px solid var(--border); padding: 3px 8px; border-radius: 2px;
+    }
+    .proj-link {
+      display: inline-block; margin-top: 0.75rem;
+      font-size: 11px; font-family: 'Space Mono', monospace;
+      color: var(--accent); text-decoration: none; letter-spacing: 0.06em;
+    }
+    .proj-link:hover { text-decoration: underline; }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); padding: 1.25rem; border-radius: 4px; }
+    .skill-group-title { font-size: 12px; font-family: 'Space Mono', monospace; color: var(--accent); margin-bottom: 0.75rem; letter-spacing: 0.08em; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .chip {
+      font-size: 11px; background: var(--surface2); color: var(--muted);
+      border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* CERTIFICATIONS */
+    .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .cert-card {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.25rem; border-radius: 4px; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .cert-icon {
+      width: 36px; height: 36px; border-radius: 4px;
+      background: var(--surface2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; flex-shrink: 0;
+    }
+    .cert-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .cert-org { font-size: 11px; color: var(--accent); font-family: 'Space Mono', monospace; }
+
+    /* CONTACT */
+    #contact { text-align: center; }
+    .contact-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 3rem 2rem; max-width: 540px; margin: 0 auto;
+    }
+    .contact-box h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 1rem; }
+    .contact-box p { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; align-items: center; }
+    .contact-link {
+      font-family: 'Space Mono', monospace; font-size: 13px;
+      color: var(--muted); text-decoration: none; letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem; text-align: center;
+      font-size: 12px; color: var(--muted); font-family: 'Space Mono', monospace;
+    }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .revealed { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero-name { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">PP</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a class="nav-contact" href="mailto:pragatiprithvi07@gmail.com">Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">B.Tech ECE &nbsp;·&nbsp; SRMIST &nbsp;·&nbsp; 2026</div>
+    <h1 class="hero-name">PRAGATI<br><span>PRITHVI</span></h1>
+    <p class="hero-sub">Hardware-focused electronics engineer passionate about PCB design, BMS, and embedded systems for EV platforms.</p>
+    <div class="hero-tags">
+      <span class="htag">PCB Design</span>
+      <span class="htag">BMS · EV Systems</span>
+      <span class="htag">Altium · KiCad</span>
+      <span class="htag">Embedded Systems</span>
+      <span class="htag">ESP32 · Arduino</span>
+      <span class="htag">9.5 CGPA</span>
+    </div>
+    <div class="hero-btns">
+      <a class="btn-primary" href="PragatiPrithvi_Resume.pdf" download>Download Resume ↓</a>
+      <a class="btn-outline" href="#projects">View Projects</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label reveal">// about</div>
+  <div class="sec-line reveal"></div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Final-year B.Tech student in Electronics and Computer Engineering at SRMIST, Chennai. I build real hardware — from PCB layouts to battery management systems — and love the intersection of power electronics and embedded firmware.</p>
+      <p>With internships at Euler Motors and Gajari Brisk (EV startup), I've worked on real automotive BMS algorithms, HIL testing, and battery pack validation. My passion is designing PCBs and hardware that actually gets made.</p>
+      <p>Outside the lab, I've led teams through rover builds, IoT deployments, and robotic arms — all from scratch, no shortcuts.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card reveal"><div class="stat-num">9.5</div><div class="stat-label">CGPA / 10</div></div>
+      <div class="stat-card reveal"><div class="stat-num">2</div><div class="stat-label">EV Internships</div></div>
+      <div class="stat-card reveal"><div class="stat-num">6+</div><div class="stat-label">Hardware Projects</div></div>
+      <div class="stat-card reveal"><div class="stat-num">3+</div><div class="stat-label">Certifications</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-label reveal">// experience</div>
+  <div class="sec-line reveal"></div>
+  <div class="exp-list">
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <span class="exp-role">Model-Based Design Intern – BMS</span>
+        <span class="exp-date">Sep 2025 – Present</span>
+      </div>
+      <div class="exp-company">Euler Motors &nbsp;·&nbsp; Delhi, India</div>
+      <ul class="exp-bullets">
+        <li>Developed and validated BMS algorithms for EV platforms using MATLAB and Simulink</li>
+        <li>Generated embedded C code from Simulink models for real-time HIL testing</li>
+        <li>Debugged model calibration and optimised BMS control logic for efficiency and functional safety</li>
+        <li>Collaborated with cross-functional teams on automotive-grade BMS architecture</li>
+      </ul>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <span class="exp-role">BMS Hardware &amp; Testing Intern</span>
+        <span class="exp-date">Jun 2025 – Jul 2025</span>
+      </div>
+      <div class="exp-company">Gajari Brisk (EV Startup) &nbsp;·&nbsp; MNNIT, Prayagraj</div>
+      <ul class="exp-bullets">
+        <li>Simulated and configured lithium-ion battery packs for performance, safety, and thermal stability</li>
+        <li>Validated SoC/SoH test procedures using oscilloscopes and simulation environments</li>
+        <li>Conducted cell balancing logic verification and fault isolation testing</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label reveal">// projects</div>
+  <div class="sec-line reveal"></div>
+  <div class="proj-grid">
+    <div class="proj-card reveal">
+      <div class="proj-icon">🔋</div>
+      <div class="proj-title">Smart Battery Monitoring System</div>
+      <div class="proj-sub">BMS Hardware Design</div>
+      <div class="proj-desc">Touch-controlled voltage management system with real-time battery health monitoring and fault detection logic for lithium-ion cells.</div>
+      <div class="proj-tags"><span class="ptag">BMS</span><span class="ptag">Power Electronics</span><span class="ptag">Hardware</span></div>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-icon">🤖</div>
+      <div class="proj-title">Vision-Guided Robotic Arm</div>
+      <div class="proj-sub">YOLOv8 · Arduino · 3-DOF</div>
+      <div class="proj-desc">AI-powered robotic arm achieving ~90% detection accuracy at 25 FPS. Trained on 500+ images with integrated servo/stepper motor control.</div>
+      <div class="proj-tags"><span class="ptag">YOLOv8</span><span class="ptag">Arduino</span><span class="ptag">Computer Vision</span></div>
+      <a class="proj-link" href="https://drive.google.com/file/d/1if67edd7DiinFUiAR7mbz1Eugrca4KeC/view" target="_blank">View Report →</a>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-icon">🛰️</div>
+      <div class="proj-title">Rudra Rover – R25</div>
+      <div class="proj-sub">PCB Design · Power Distribution</div>
+      <div class="proj-desc">Designed and tested electronics boards for power distribution and control. Full hardware-software-mechanical integration and field validation.</div>
+      <div class="proj-tags"><span class="ptag">PCB Design</span><span class="ptag">Altium</span><span class="ptag">Soldering</span></div>
+      <a class="proj-link" href="https://drive.google.com/file/d/1Ti9z4985rrS9HfImFKVZ_peuDxREk1I6/view" target="_blank">View Report →</a>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-icon">📡</div>
+      <div class="proj-title">NetNerve</div>
+      <div class="proj-sub">ESP32 · ESP-NOW · Volvo Elective</div>
+      <div class="proj-desc">Resilient vehicle communication system with automatic network switching across WiFi and ESP-NOW for seamless EV connectivity.</div>
+      <div class="proj-tags"><span class="ptag">ESP32</span><span class="ptag">I2C</span><span class="ptag">Automotive Comms</span></div>
+      <a class="proj-link" href="https://drive.google.com/file/d/1roOKRc4GoLACCSwCbBeBvl_SQya_L8BJ/view" target="_blank">View Report →</a>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-icon">🌱</div>
+      <div class="proj-title">AgroSense</div>
+      <div class="proj-sub">Dual ESP32 IoT · Honorable Mention</div>
+      <div class="proj-desc">Fault-tolerant dual-ESP32 IoT system for crop health monitoring. Validated with logic analyzer; simulated 5+ fault conditions. Award winner.</div>
+      <div class="proj-tags"><span class="ptag">ESP32</span><span class="ptag">IoT</span><span class="ptag">Fault Testing</span></div>
+      <a class="proj-link" href="https://drive.google.com/file/d/1n4Litoe8P8YQN37n3NKjCBnL6491zyyw/view" target="_blank">View Report →</a>
+    </div>
+    <div class="proj-card reveal">
+      <div class="proj-icon">⚡</div>
+      <div class="proj-title">PWM Motor &amp; LED Controller</div>
+      <div class="proj-sub">Arduino Nano · MOSFET</div>
+      <div class="proj-desc">PWM-based power controller using Arduino Nano and MOSFET demonstrating signal integrity, gate drive, and load regulation fundamentals.</div>
+      <div class="proj-tags"><span class="ptag">Power Electronics</span><span class="ptag">PWM</span><span class="ptag">MOSFET</span></div>
+      <a class="proj-link" href="https://drive.google.com/file/d/1SPdjMVzVV9Lx3mX08MLrk5rGd5GPP4Ry/view" target="_blank">View Report →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-label reveal">// skills</div>
+  <div class="sec-line reveal"></div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">PCB &amp; Hardware Design</div>
+      <div class="skill-chips"><span class="chip">Altium Designer</span><span class="chip">KiCad</span><span class="chip">EasyEDA</span><span class="chip">Soldering</span><span class="chip">Schematic Capture</span><span class="chip">PCB Layout</span></div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Embedded Systems</div>
+      <div class="skill-chips"><span class="chip">Arduino</span><span class="chip">ESP32</span><span class="chip">ESP8266</span><span class="chip">Arduino Nano</span><span class="chip">PWM</span><span class="chip">Motor Control</span></div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Simulation &amp; Testing</div>
+      <div class="skill-chips"><span class="chip">MATLAB</span><span class="chip">Simulink</span><span class="chip">HIL Testing</span><span class="chip">Oscilloscope</span><span class="chip">Logic Analyzer</span></div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Protocols &amp; Communication</div>
+      <div class="skill-chips"><span class="chip">I2C</span><span class="chip">SPI</span><span class="chip">UART</span><span class="chip">ESP-NOW</span><span class="chip">CAN (aware)</span></div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Programming</div>
+      <div class="skill-chips"><span class="chip">C</span><span class="chip">C++</span><span class="chip">Python</span><span class="chip">Embedded C</span><span class="chip">Arduino IDE</span></div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Other Tools</div>
+      <div class="skill-chips"><span class="chip">SolidWorks</span><span class="chip">AutoCAD</span><span class="chip">YOLOv8</span><span class="chip">OpenCV</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="sec-label reveal">// certifications &amp; achievements</div>
+  <div class="sec-line reveal"></div>
+  <div class="cert-list">
+    <div class="cert-card reveal">
+      <div class="cert-icon">🏆</div>
+      <div><div class="cert-title">ISWDP Cohort 5 – Top Performer</div><div class="cert-org">Embedded Systems · IoT · Industrial Automation</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🎓</div>
+      <div><div class="cert-title">Academic Merit Scholarship</div><div class="cert-org">SRMIST · All Semesters · Best Performer</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🛠️</div>
+      <div><div class="cert-title">Altium Designer · KiCad · SolidWorks</div><div class="cert-org">Self-trained · 2024</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🌟</div>
+      <div><div class="cert-title">Honorable Mention – Unplugged 1.0</div><div class="cert-org">AgroSense · ML-driven Agricultural Analysis</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label reveal">// contact</div>
+  <div class="sec-line reveal"></div>
+  <div class="contact-box reveal">
+    <h3>Let's build something.</h3>
+    <p>I'm open to full-time hardware engineering roles in PCB design, BMS, and embedded systems. Feel free to reach out!</p>
+    <div class="hero-btns" style="justify-content:center; margin-bottom: 1.5rem;">
+      <a class="btn-primary" href="mailto:pragatiprithvi07@gmail.com">Send Email ↗</a>
+      <a class="btn-outline" href="https://linkedin.com/in/pragati-prithvi" target="_blank">LinkedIn</a>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:pragatiprithvi07@gmail.com">pragatiprithvi07@gmail.com</a>
+      <a class="contact-link" href="https://github.com/pragati404" target="_blank">github.com/pragati404</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Pragati Prithvi &nbsp;·&nbsp; Chennai, India &nbsp;·&nbsp; Built with HTML &amp; CSS</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('revealed'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
